@@ -9,7 +9,7 @@ export default function Users() {
 
     useEffect(() => {
 
-axiosInstance.get('users').then(value => setUsers([...value.data]));
+        axiosInstance.get('users').then(value => setUsers([...value.data]));
         // fetch('https://jsonplaceholder.typicode.com/users')
         //     .then(value => value.json())
         //     .then(value => {
@@ -20,7 +20,7 @@ axiosInstance.get('users').then(value => setUsers([...value.data]));
     const search = (id) => {
         let foundUser = users.find(value => value.id === id);
         console.log(foundUser);
-        setSingleUser(foundUser)
+        setSingleUser(foundUser);
     }
 
     return (
