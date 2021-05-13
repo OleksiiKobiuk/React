@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Post from "../post/Post";
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -8,8 +7,8 @@ import {
     Link
 } from 'react-router-dom';
 import PostDetails from "../post/PostDetails";
+
 export default function Posts(props) {
-    console.log(props);
     let {match: {url}} = props;
     let [posts, setPosts] = useState([]);
     useEffect(() => {
@@ -22,7 +21,7 @@ export default function Posts(props) {
     return (
         <div>
             {
-            posts.map(value => <Post key={value.id} item={value} url={url} />)
+            posts.map(value => <Post key={value.id} item={value} url={url}/>)
         }
 <Switch>
     <Route path={'/posts/:id'} component={PostDetails}/>

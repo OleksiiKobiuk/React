@@ -9,7 +9,6 @@ import {
 } from 'react-router-dom';
 
 export default function Users(props) {
-    console.log(props);
     let {match: {url}} = props;
     let [users, setUsers] = useState([]);
     useEffect(() => {
