@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 
 export default function Users(props) {
+    console.log(props);
     let {match: {url}} = props;
     let [users, setUsers] = useState([]);
     useEffect(() => {
@@ -23,9 +24,9 @@ export default function Users(props) {
             {
                 users.map(value => <User key={value.id} item = {value} url={url}/>)
             }
-            <Switch>
-                <Route path={'/users/:id'} component={UserDetails}/>
-            </Switch>
+            {/*<Switch>*/}
+            {/*    <Route path={'/users/:id'} component={UserDetails}/>*/}
+            {/*</Switch>*/}
         </div>
     );
 }

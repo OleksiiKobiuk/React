@@ -8,6 +8,7 @@ import {
 import Home from "./components/home/Home";
 import Users from "./components/users/Users";
 import Posts from "./components/posts/Posts";
+import UserDetails from "./components/user-details/UserDetails";
 
 export default function App() {
     return (
@@ -22,8 +23,9 @@ export default function App() {
                     <Route exact path={'/'}>
                         <Home/>
                     </Route>
-                    <Route path={'/users'} component={Users}/>
+                    <Route exact path={'/users'} component={Users}/>
                     <Route path={'/posts'} component={Posts}/>
+                    <Route path={'/users/:id'} component={UserDetails}/>
                     {/*/!*<Route path={'/posts'} render={() => <Posts/>}/>*!/ чомусь не було історії?*/}
                 </Switch>
             </div>
