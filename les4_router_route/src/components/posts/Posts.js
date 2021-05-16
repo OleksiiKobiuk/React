@@ -20,12 +20,12 @@ export default function Posts(props) {
     }, []);
     return (
         <div>
+            <Switch>
+                <Route path={'/posts/:id'} component={PostDetails}/>
+            </Switch>
             {
             posts.map(value => <Post key={value.id} item={value} url={url}/>)
         }
-<Switch>
-    <Route path={'/posts/:id'} component={PostDetails}/>
-</Switch>
         </div>
     );
 }
