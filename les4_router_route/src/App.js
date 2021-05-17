@@ -20,6 +20,7 @@ import Users from "./components/users/Users";
 import Posts from "./components/posts/Posts";
 import UserDetails from "./components/user-details/UserDetails";
 import Casts from "./components/casts/Casts";
+import Posts_using_reducer from "./components/posts/Posts_using_reducer";
 
 export default function App() {
     return (
@@ -27,9 +28,11 @@ export default function App() {
             <div>
                 <Link to={'/'}>Home</Link>
                 <br/>
-                <Link to={'/users'}>Users</Link>
+                <Link to={{pathname: '/users', search: '?page=1'}}>Users</Link>
                 <br/>
                 <Link to={'/posts'}>Posts</Link>
+                <br/>
+                <Link to={'/posts_with_reducer'}>Posts_with_reducer</Link>
                 <br/>
                 <Link to={'/cast'}>Cast from Futurama</Link>
                 <Switch>
@@ -40,6 +43,7 @@ export default function App() {
                     <Route path={'/posts'} component={Posts}/>
                     <Route path={'/cast'} component={Casts}/>
                     <Route path={'/users/:id'} component={UserDetails}/>
+                    <Route path={'/posts_with_reducer'} component={Posts_using_reducer}/>
                     {/*/!*<Route path={'/posts'} render={() => <Posts/>}/>*!/ чомусь не було історії?*/}
                 </Switch>
             </div>

@@ -9,7 +9,7 @@ export default function PostDetails(props) {
             .then(value => {
                 setPost({...value});
             });
-    }, [post])
+    }, [id])
     return (
         <div>
             {post && <h4>{post.id} - {post.title} - {post.body} </h4>}
