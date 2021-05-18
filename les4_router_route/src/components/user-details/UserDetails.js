@@ -12,7 +12,7 @@ export default function UserDetails(props) {
     // }, [id])
      useEffect(() => {
          setUser(state);
-    }, [id])
+    }, [id]);
     return (
         <div>
             {user && <h3>{user.id} - {user.name}: {user.email}</h3>}
