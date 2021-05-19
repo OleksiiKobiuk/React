@@ -19,16 +19,22 @@ import Posts from "./components/posts/Posts";
 import UserDetails from "./components/user-details/UserDetails";
 import Posts_using_reducer from "./components/posts/Posts_using_reducer";
 import UsersReqres from "./components/users/UsersReqres";
+import {useState} from "react";
 
 export default function App() {
+    let[initPage,setPage] = useState(1);
     return (
         <Router>
             <div>
-                {/*<Link to={'/users'}>UsersReqres</Link>*/}
-                <Link to={{pathname: '/users', search: '?page=1'}}>UsersReqres</Link>
-                <hr/>
                 <Link to={'/'}>Home</Link>
                 <br/>
+                <button onClick={() => setPage(initPage = 1)}> Prev page</button>
+                {console.log(initPage)}
+                <Link to={{pathname: '/users', search: '?page='+initPage}}>UsersReqres</Link>
+                {/*<Link to={'/users'}>UsersReqres</Link>*/}
+                <button onClick={() => setPage(initPage = 2)}> Next page</button>
+                {console.log(initPage)}
+                <hr/>
                 {/*<Link to={{pathname: '/users', search: '?page=1'}}>Users</Link>*/}
                 {/*<br/>*/}
                 <Link to={'/posts'}>Posts</Link>
@@ -40,9 +46,9 @@ export default function App() {
                         <Home/>
                     </Route>
                     {/*<Route exact path={'/users'} component={Users}/>*/}
-                    <Route path={'/users?page=1'} component={UsersReqres}/>
+                    {/*<Route path={'/users?page=1'} component={UsersReqres}/>*/}
+                    <Route path={'/users'} component={UsersReqres}/>
                     <Route path={'/posts'} component={Posts}/>
-                    {/*<Route path={'/users'} component={UsersReqres}/>*/}
                     {/*<Route path={'/users/:id'} component={UserDetails}/>*/}
                     <Route path={'/posts_with_reducer'} component={Posts_using_reducer}/>
                     {/*/!*<Route path={'/posts'} render={() => <Posts/>}/>*!/ чомусь не було історії?*/}

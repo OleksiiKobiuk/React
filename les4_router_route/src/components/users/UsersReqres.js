@@ -1,22 +1,32 @@
 import {useEffect, useState} from "react";
 import UserReqres from "../user/UserReqres";
+import App from "../../App";
 
 export default function UsersReqres(props) {
     let [users, setUsers] = useState([]);
-    console.log(props);
+
     useEffect(() => {
-        fetch('https://reqres.in/api/users?page=1')
+        fetch('https://reqres.in/api/users')
             .then(value => value.json())
             .then(value => {
-                setUsers([...value]);
+                setUsers((value.data));
+                console.log(value.data);
             });
+
     }, [])
 
     return (
 
         <div>
+
             {
-                users.map(value => <UserReqres key={value.data.id} item={value.data}/>)
+                users.map(value => <div key={value.id}>
+                    <p>
+                        <strong>{`${value.first_name} ${value.last_name}`}</strong>
+                    </p>
+                    <p>{value.email}</p>
+                    <img key={value.avatar} src={value.avatar}/>
+                </div>)
             }
 
         </div>
