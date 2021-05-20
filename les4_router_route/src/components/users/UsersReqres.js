@@ -1,32 +1,30 @@
 import {useEffect, useState} from "react";
 import UserReqres from "../user/UserReqres";
-import App from "../../App";
+import {Route, Switch} from "react-router-dom";
+import UserReqDetails from "../user-details/UserReqDetails";
 
 export default function UsersReqres(props) {
     let [users, setUsers] = useState([]);
+    let {location: {search}} = props;
+    let {match: {url}} = props;
 
     useEffect(() => {
-        fetch('https://reqres.in/api/users')
+        fetch('https://reqres.in/api/users'+search)
             .then(value => value.json())
             .then(value => {
-                setUsers((value.data));
-                console.log(value.data);
+                setUsers([...value.data]);
             });
 
-    }, [])
+    }, [search])
 
     return (
 
         <div>
-
+            <Switch>
+                <Route path={'/users/:id'} component={UserReqDetails}/>
+            </Switch>
             {
-                users.map(value => <div key={value.id}>
-                    <p>
-                        <strong>{`${value.first_name} ${value.last_name}`}</strong>
-                    </p>
-                    <p>{value.email}</p>
-                    <img key={value.avatar} src={value.avatar}/>
-                </div>)
+                users.map(value => <UserReqres key={value.id} item={value} url={url}/>)
             }
 
         </div>
