@@ -7,9 +7,9 @@ export default function UsersReqres(props) {
     let [users, setUsers] = useState([]);
     let {location: {search}} = props;
     let {match: {url}} = props;
-
+console.log(props);
     useEffect(() => {
-        fetch('https://reqres.in/api/users'+search)
+        fetch('https://reqres.in/api/users' + search)
             .then(value => value.json())
             .then(value => {
                 setUsers([...value.data]);
