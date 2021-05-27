@@ -1,37 +1,37 @@
 import {
-    START_POSTS_LOADING,
-    STOP_POSTS_LOADING,
-    SET_POSTS,
-    SET_POSTS_ERROR
+    START_COMMENTS_LOADING,
+    STOP_COMMENTS_LOADING,
+    SET_COMMENTS,
+    SET_COMMENTS_ERROR
 } from '../action-types';
 
 const initialState = {
-    posts: [],
-    isPostsLoading: false,
+    comments: [],
+    isCommentsLoading: false,
     error: ''
 };
 
-export const postsReducer = (state = initialState, action) => {
+export const commentsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case START_POSTS_LOADING: {
+        case START_COMMENTS_LOADING: {
             return {
                 ...state,
-                isPostsLoading: true
+                isCommentsLoading: true
             }
         }
-        case STOP_POSTS_LOADING: {
+        case STOP_COMMENTS_LOADING: {
             return {
                 ...state,
-                isPostsLoading: false
+                isCommentsLoading: false
             }
         }
-        case SET_POSTS: {
+        case SET_COMMENTS: {
             return {
                 ...state,
-                posts: action.payload
+                comments: action.payload
             }
         }
-        case SET_POSTS_ERROR: {
+        case SET_COMMENTS_ERROR: {
             return {
                 ...state,
                 error: action.payload

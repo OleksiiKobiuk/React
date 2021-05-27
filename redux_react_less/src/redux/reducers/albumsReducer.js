@@ -1,37 +1,37 @@
 import {
-    START_POSTS_LOADING,
-    STOP_POSTS_LOADING,
-    SET_POSTS,
-    SET_POSTS_ERROR
+    START_ALBUMS_LOADING,
+    STOP_ALBUMS_LOADING,
+    SET_ALBUMS,
+    SET_ALBUMS_ERROR
 } from '../action-types';
 
 const initialState = {
-    posts: [],
-    isPostsLoading: false,
+    albums: [],
+    isAlbumsLoading: false,
     error: ''
 };
 
-export const postsReducer = (state = initialState, action) => {
+export const albumsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case START_POSTS_LOADING: {
+        case START_ALBUMS_LOADING: {
             return {
                 ...state,
-                isPostsLoading: true
+                isAlbumsLoading: true
             }
         }
-        case STOP_POSTS_LOADING: {
+        case STOP_ALBUMS_LOADING: {
             return {
                 ...state,
-                isPostsLoading: false
+                isAlbumsLoading: false
             }
         }
-        case SET_POSTS: {
+        case SET_ALBUMS: {
             return {
                 ...state,
-                posts: action.payload
+                albums: action.payload
             }
         }
-        case SET_POSTS_ERROR: {
+        case SET_ALBUMS_ERROR: {
             return {
                 ...state,
                 error: action.payload
