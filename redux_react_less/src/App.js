@@ -10,19 +10,28 @@ import {
     setComments,
     setCommentsError,
     startCommentsLoading,
-    stopCommentsLoading, 
-    
+    stopCommentsLoading,
+
     setAlbums,
     setAlbumsError,
     startAlbumsLoading,
-    stopAlbumsLoading
+    stopAlbumsLoading,
+
+    startPhotosLoading,
+    stopPhotosLoading,
+    setPhotos,
+    setPhotosError,
+
+    startTodosLoading,
+    stopTodosLoading,
+    setTodos,
+    setTodosError
 } from './redux';
 
 
 const Posts = () => {
     const data = useSelector(({posts}) => posts);
     const dispatch = useDispatch();
-    console.log(data);
     const postsFetcher = async () => {
         try {
             dispatch(startPostsLoading());
@@ -132,19 +141,101 @@ const Albums = () => {
         <div>
             {data.albums.map(({id, userId, title}) => (
                 <p key={id}>
-                  User #{userId}:  {title}
+                    User #{userId}: {title}
                 </p>
             ))}
         </div>
     )
 };
+const Photos = () => {
+    const data = useSelector(({photos}) => photos);
+    const dispatch = useDispatch();
+    console.log(data);
+    const photosFetcher = async () => {
+        try {
+            dispatch(startPhotosLoading());
+            const resp = await fetch('https://jsonplaceholder.typicode.com/photos/')
+            const data = await resp.json();
+            dispatch(setPhotos(data));
+        } catch (e) {
+            console.log(e);
+            dispatch(setPhotosError('failed to fetch data'))
+        } finally {
+            dispatch(stopPhotosLoading());
+        }
+    };
+
+    useEffect(() => {
+        photosFetcher();
+    }, []);
+
+    if (data.isPhotosLoading) {
+        return <h1>Photos are loading!!!</h1>
+    }
+    if (data.error) {
+        return <h1>{data.error}</h1>
+    }
+
+
+    return (
+        <div>
+            {data.photos.map(({id, url, title, thumbnailUrl}) => (
+                <p key={id}>
+                    <h2> Title: {title}</h2> <br/>
+                    <img key={url} src={thumbnailUrl}/>
+                </p>
+            ))}
+        </div>
+    )
+};
+const Todos = () => {
+    const data = useSelector(({todos}) => todos);
+    const dispatch = useDispatch();
+    const todosFetcher = async () => {
+        try {
+            dispatch(startTodosLoading());
+            const resp = await fetch('https://jsonplaceholder.typicode.com/todos');
+            const data = await resp.json();
+            console.log(data);
+            dispatch(setTodos(data));
+        } catch (e) {
+            dispatch(setTodosError('failed to fetch data'));
+        } finally {
+            dispatch(stopTodosLoading());
+        }
+    };
+    useEffect(() => {
+        todosFetcher();
+    }, []);
+    console.log(data)
+
+    // if (data.isTodosLoading) {
+    //     return <h1>Todos are loading</h1>
+    // }
+    // if (data.error) {
+    //     return <h1>{data.error}</h1>
+    // }
+
+    return (
+        <div>
+            {data.todos.map(({id, title, completed}) => (
+                <p key={id}>
+                    {title} <h3>Copmleted: {completed.toString()}</h3>
+                </p>
+            ))}
+        </div>
+    )
+};
+
 export default function App() {
 
     return (
         <div>
             {/*<Posts/>*/}
             {/*<Comments/>*/}
-            <Albums/>
+            {/*<Albums/>*/}
+            {/*<Photos/>*/}
+            <Todos/>
         </div>
     );
 }
