@@ -1,3 +1,3 @@
 export * from './store';
-export * from './action-types';
-export * from './action-creators'
+export * from './actionTypes';
+export * from './actionCreators';

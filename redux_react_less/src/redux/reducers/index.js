@@ -1,14 +1,6 @@
 import {combineReducers} from "redux";
-import {postsReducer} from "./postsReducer";
-import {commentsReducer} from "./commentsReducer";
-import {albumsReducer} from "./albumsReducer";
-import {photosReducer} from "./photosReducer";
-import {todosReducer} from "./todosReducer";
+import {productsReducer} from "./productsReducer";
 
-export default combineReducers({
-    posts: postsReducer,
-    comments: commentsReducer,
-    albums: albumsReducer,
-    photos: photosReducer,
-    todos: todosReducer
+export const rootReducer = combineReducers({
+products: productsReducer
 });
