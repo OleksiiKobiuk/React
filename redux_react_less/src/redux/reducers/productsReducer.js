@@ -48,7 +48,7 @@ export const productsReducer = (state = initialState, action) => {
             const itemInProducts = state.products.find(el => el.id === payload);
             return {
                 ...state,
-                wishList: [...state.wishList,itemInProducts]
+                wishList: [...state.wishList, itemInProducts]
             }
         }
         case REMOVE_FROM_WISHLIST: {
@@ -63,16 +63,22 @@ export const productsReducer = (state = initialState, action) => {
             }
         }
         case ADD_TO_CART: {
+            const {payload} = action;
+            const itemInProducts = state.products.find(el => el.id === payload);
             return {
                 ...state,
-                cart: []
+                cart: [...state.cart, itemInProducts]
             }
         }
         case REMOVE_FROM_CART: {
-            return {
-                ...state,
-                cart: []
-            }
+            const {payload} = action;
+            const itemRemoveIndex = state.cart.findIndex(({id}) => id === payload);
+            if (itemRemoveIndex >= 0)
+                return {
+                    ...state,
+                    cart: state.cart.splice(itemRemoveIndex,1)
+                };
+            return state
         }
         default:
             return state

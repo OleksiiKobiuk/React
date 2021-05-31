@@ -13,7 +13,11 @@ import {
 
 const Header = () => {
     const {wishList} = useSelector(({products}) => products);
+    const {cart} = useSelector(({products}) => products);
     const wishListTotalPrice = wishList.reduce((acc,el) => {
+        return (acc+=el.price);
+    }, 0);
+    const cartTotalPrice = cart.reduce((acc,el) => {
         return (acc+=el.price);
     }, 0);
     return (
@@ -28,7 +32,8 @@ const Header = () => {
                     display: 'flex',
                     alignItems: 'center'
                 }}>
-                    <h3 style={{marginRight: '20px'}}>cart: {0}</h3>
+                    <h3 style={{marginRight: '20px'}}>cart: {cart.length} items, sum {cartTotalPrice.toFixed(2)} </h3>
+                    {console.log(cart)}
                     <h3 title={wishListTotalPrice}>wishlist: {wishList.length}</h3>
                 </div>
             </header>
@@ -37,12 +42,15 @@ const Header = () => {
     )
 };
 const isInWishList = (wishlist, id) => !!wishlist.find(el => el.id === id);
+const isInCart = (cart, id) => !!cart.find(el => el.id === id);
 
 const Products = () => {
     const {wishList} = useSelector(({products}) => products);
+    const {cart} = useSelector(({products}) => products);
     const {products, isProductsLoading} = useSelector(({products}) => products);
     const dispatch = useDispatch();
 
+    // ПЕРЕНЕСЕНО В MIDLWARE fetchProducts
     // const fetchProducts = async () => {
     //     try {
     //         dispatch(setProductsLoading());
@@ -83,6 +91,19 @@ const Products = () => {
                             ? 'remove from wishlist'
                             : 'add to wishlist'}
                     </button>
+                    <button onClick={() => {
+                        dispatch(addToCart(product.id))
+                    }}>
+                        add to cart
+                    </button>
+                     <button name='removeFromCart' onClick={() => {
+                         if (isInCart(cart, product.id)) {
+                             return dispatch(removeFromCart(product.id))
+                         }
+                    }}>
+                         {isInCart(cart, product.id) ? 'remove from cart' : '----'}
+                    </button>
+
                     <h4>{product.title}
                     <br/>
                     Price: {product.price}</h4>
